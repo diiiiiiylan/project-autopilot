@@ -1,0 +1,7 @@
+interface:
+  display_name: "项目总控"
+  short_description: "自主规划、协作、验证非简单项目任务"
+  default_prompt: "Use $project-autopilot to complete a non-trivial project change from planning through verification and acceptance."
+
+policy:
+  allow_implicit_invocation: true

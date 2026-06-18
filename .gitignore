@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.cache/
+.env
+.env.*
+*.local
+*.log
+*.tmp
+__pycache__/
+*.pyc
+*.pyo
+video/out/
+!.gitkeep

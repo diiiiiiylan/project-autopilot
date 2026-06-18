@@ -1,0 +1,22 @@
+[
+  {
+    "name": "small_explanation",
+    "prompt": "Explain this function without changing files.",
+    "expected_mode": "small"
+  },
+  {
+    "name": "small_spelling",
+    "prompt": "Fix a spelling typo in one README sentence.",
+    "expected_mode": "small"
+  },
+  {
+    "name": "medium_cross_module",
+    "prompt": "Add a cross-module workflow touching the UI and API adapter.",
+    "expected_mode": "medium"
+  },
+  {
+    "name": "large_migration",
+    "prompt": "Add a data structure migration and update the public API.",
+    "expected_mode": "large"
+  }
+]

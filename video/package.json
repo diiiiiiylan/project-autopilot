@@ -1,0 +1,19 @@
+{
+  "name": "project-autopilot-video",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "render": "remotion render src/index.ts ProjectAutopilotIntro ../media/project-autopilot-intro.mp4 --overwrite",
+    "still": "remotion still src/index.ts ProjectAutopilotIntro --frame=450 --output=../media/project-autopilot-frame.png --overwrite"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.385",
+    "remotion": "^4.0.385",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "typescript": "^5.8.3"
+  }
+}
