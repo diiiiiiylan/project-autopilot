@@ -10,6 +10,8 @@ Use this skill to run non-trivial project work with low interaction, bounded aut
 ## Load Only What Is Needed
 
 - Read `references/project-governance.md` before starting any medium or large task.
+- Read `references/project-intake.md` when the user says they are starting a project, using plan mode, asking to modify a project, or giving an ambiguous non-trivial goal.
+- Read `references/staffing-model.md` before choosing departments, adding employees, removing employees, or delegating work.
 - Read `references/openspec-workflow.md` when a task needs a specification, change lifecycle, or fallback templates.
 - Read `references/department-contracts.md` before creating subagents or simulating department roles.
 - Read `references/acceptance-gates.md` before declaring work complete.
@@ -24,6 +26,28 @@ Classify the task before acting:
 - Large: affects multiple modules, architecture, public contracts, data migration, new dependencies, security, release, or long-running collaboration. Use the full OpenSpec lifecycle and department agents as needed.
 
 Do not create departments for ceremony. Do not assign overlapping scopes. Do not parallelize tasks with ordering dependencies.
+
+## Project Lead Thread
+
+Treat the first main project conversation as the project lead thread. The lead thread owns requirement clarification, planning, staffing, task decomposition, cross-department coordination, acceptance, and the final report.
+
+For medium and large tasks, record the lead role in the change workspace using the coordination state template. If the runtime cannot expose a real thread identifier, record `initial-main-thread` as the lead marker.
+
+Do not let subagents or department workers become project leads. They may report status, concerns, blockers, and evidence, but the lead thread decides sequencing, staffing changes, acceptance, and final handoff.
+
+## Intake And Staffing
+
+When the user says they are using plan mode, starting a project, modifying a project, or building a non-trivial product, check whether the goal is missing project size, boundaries, acceptance standard, forbidden actions, delivery target, or concurrency limit.
+
+Ask only questions that materially change the plan. If missing details do not affect the safe main path, proceed with conservative assumptions and record them in the project brief.
+
+Use a light staffing model:
+
+- Start with the fewest departments that can preserve structure and verification quality.
+- Add employees only when work is independent, bounded, and cheaper than keeping all context in the lead thread.
+- Remove or deactivate employees when scopes overlap, tasks complete, the project shrinks, or sequential work costs less than parallel coordination.
+- Never exceed concurrency 4. Use fewer workers unless the project is large and the work is truly parallel.
+- Keep the people-operations role optional; it recommends staffing and conflict fixes but does not implement code or replace QA/review.
 
 ## Default Workflow
 
@@ -61,12 +85,15 @@ Use real subagents only when the environment provides them. If real subagents ar
 
 Use these global custom agents when available:
 
+- `people-operations-department.toml`
 - `requirements-architecture-department.toml`
 - `development-department.toml`
 - `quality-assurance-department.toml`
 - `independent-review-department.toml`
 
 Title every delegated task as `XX部门：具体任务`. Maximum concurrency target is 4. Maximum depth is 1. Subagents must not create further subagents.
+
+Use `人事协调部门：项目编制建议` only when staffing is unclear, a project is large, roles overlap, or the lead thread needs an independent check on whether to add or remove employees. Do not spend a real subagent on people operations for small tasks.
 
 ## Scripts
 

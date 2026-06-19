@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "mode": "{{mode}}",
+  "change_id": "{{change_id}}",
+  "lead_thread_role": "{{lead_thread_role}}",
+  "phase": "intake",
+  "project_size": "{{project_size}}",
+  "max_concurrency": {{max_concurrency}},
+  "active_departments": {{active_departments_json}},
+  "inactive_departments": {{inactive_departments_json}},
+  "updated_at": "{{updated_at}}"
+}

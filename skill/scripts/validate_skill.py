@@ -22,6 +22,8 @@ REQUIRED_FILES = [
     "CHANGELOG.md",
     "agents/openai.yaml",
     "references/project-governance.md",
+    "references/project-intake.md",
+    "references/staffing-model.md",
     "references/openspec-workflow.md",
     "references/department-contracts.md",
     "references/acceptance-gates.md",
@@ -32,6 +34,9 @@ REQUIRED_FILES = [
     "assets/templates/department-brief.md",
     "assets/templates/handoff.md",
     "assets/templates/acceptance-report.md",
+    "assets/templates/project-brief.md",
+    "assets/templates/staffing-plan.md",
+    "assets/templates/coordination-state.json",
     "scripts/initialize_project.py",
     "scripts/task_registry.py",
     "scripts/detect_duplicate_tasks.py",
@@ -46,6 +51,7 @@ AGENT_FILES = [
     "development-department.toml",
     "quality-assurance-department.toml",
     "independent-review-department.toml",
+    "people-operations-department.toml",
 ]
 
 SECRET_PATTERNS = [
@@ -94,7 +100,7 @@ def parse_toml(path: Path) -> dict[str, object]:
 
 def classify_task(text: str) -> str:
     lowered = text.lower()
-    small_markers = ["typo", "spelling", "explain", "single-file", "one file", "copy fix"]
+    small_markers = ["typo", "spelling", "explain", "single-file", "one file", "copy fix", "拼写", "解释"]
     large_markers = [
         "migration",
         "public api",
@@ -104,8 +110,13 @@ def classify_task(text: str) -> str:
         "release",
         "architecture",
         "multiple modules",
+        "开始制作",
+        "做一个项目",
+        "大型",
+        "架构",
+        "迁移",
     ]
-    medium_markers = ["cross-module", "multiple files", "integration", "refactor"]
+    medium_markers = ["cross-module", "multiple files", "integration", "refactor", "跨模块", "计划模式", "修改项目", "优化"]
     if any(marker in lowered for marker in large_markers):
         return "large"
     if any(marker in lowered for marker in medium_markers):
@@ -113,6 +124,24 @@ def classify_task(text: str) -> str:
     if any(marker in lowered for marker in small_markers):
         return "small"
     return "small"
+
+
+def needs_project_intake(text: str) -> bool:
+    lowered = text.lower()
+    markers = [
+        "plan mode",
+        "planning mode",
+        "start a project",
+        "build a project",
+        "modify a project",
+        "计划模式",
+        "开始做",
+        "开始制作",
+        "我要修改",
+        "做一个",
+        "项目",
+    ]
+    return any(marker in lowered for marker in markers)
 
 
 def validate_references(root: Path) -> list[str]:
@@ -123,7 +152,7 @@ def validate_references(root: Path) -> list[str]:
     skill_text = (root / "SKILL.md").read_text(encoding="utf-8")
     for match in re.findall(r"`([^`]+?\.(?:md|py|yaml|json|toml))`", skill_text):
         candidate = root / match
-        if match.startswith("requirements-") or match.startswith("development-") or match.startswith("quality-") or match.startswith("independent-"):
+        if match.startswith("requirements-") or match.startswith("development-") or match.startswith("quality-") or match.startswith("independent-") or match.startswith("people-"):
             continue
         if not candidate.exists():
             errors.append(f"Broken referenced path in SKILL.md: {match}")

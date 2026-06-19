@@ -4,6 +4,8 @@
 
 It helps Codex handle non-trivial project work by choosing the right execution mode, using OpenSpec or fallback templates as the source of truth, coordinating bounded department agents, preventing duplicate task execution, running verification gates, repairing failures, and producing acceptance evidence.
 
+The package now includes a lightweight staffing model: the first main project conversation acts as the project lead, while optional departments are added or removed only when project size, risk, and parallelism justify the extra coordination cost.
+
 ## What It Includes
 
 - `skill/`: the Codex Skill folder.

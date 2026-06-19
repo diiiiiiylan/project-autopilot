@@ -12,7 +12,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
-AGENT_DIR = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex")) / "agents"
+REPO_AGENT_DIR = ROOT.parent / "custom-agents"
+AGENT_DIR = REPO_AGENT_DIR if REPO_AGENT_DIR.exists() else Path(os.environ.get("CODEX_HOME", Path.home() / ".codex")) / "agents"
 
 
 def load_module(name: str, path: Path):
@@ -40,14 +41,23 @@ class ProjectAutopilotSkillTests(unittest.TestCase):
             self.assertEqual(data["name"], name.removesuffix(".toml"))
             self.assertTrue(data["description"])
             self.assertTrue(data["developer_instructions"])
+        people = validate_skill.parse_toml(AGENT_DIR / "people-operations-department.toml")
+        self.assertIn("人事协调部门", people["description"])
 
     def test_small_task_does_not_trigger_complex_flow(self):
         self.assertEqual(validate_skill.classify_task("Fix a spelling typo in one file"), "small")
         self.assertEqual(validate_skill.classify_task("Explain this code only"), "small")
+        with tempfile.TemporaryDirectory() as tmp:
+            result = initialize_project.initialize_project(Path(tmp), "Fix README spelling", force_fallback=True, complexity="small")
+            self.assertEqual(result["mode"], "direct")
+            self.assertEqual(result["active_departments"], [])
+            self.assertFalse((Path(tmp) / ".project-autopilot").exists())
 
     def test_cross_module_task_triggers(self):
         self.assertEqual(validate_skill.classify_task("Implement a cross-module integration"), "medium")
         self.assertEqual(validate_skill.classify_task("Add a data structure migration"), "large")
+        self.assertTrue(validate_skill.needs_project_intake("我要开始做一个 SaaS 项目"))
+        self.assertTrue(validate_skill.needs_project_intake("计划模式下优化一个跨模块功能"))
 
     def test_duplicate_task_cannot_be_claimed_twice(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -73,6 +83,22 @@ class ProjectAutopilotSkillTests(unittest.TestCase):
             change_dir = project / ".project-autopilot" / "changes" / "demo-change"
             self.assertTrue((change_dir / "proposal.md").exists())
             self.assertTrue((change_dir / "task-registry.json").exists())
+            self.assertTrue((change_dir / "project-brief.md").exists())
+            self.assertTrue((change_dir / "staffing-plan.md").exists())
+            state = json.loads((change_dir / "coordination-state.json").read_text(encoding="utf-8"))
+            self.assertEqual(state["lead_thread_role"], "initial-main-thread")
+            self.assertLessEqual(state["max_concurrency"], 4)
+            self.assertEqual(len({item["scope_key"] for item in state["active_departments"]}), len(state["active_departments"]))
+            self.assertNotIn("people-operations-department", {item["name"] for item in state["active_departments"]})
+
+    def test_large_staffing_has_bounded_non_overlapping_departments(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            result = initialize_project.initialize_project(Path(tmp), "Large Platform Change", force_fallback=True, complexity="large")
+            self.assertEqual(result["project_size"], "large")
+            self.assertLessEqual(result["max_concurrency"], 4)
+            scopes = [item["scope_key"] for item in result["active_departments"]]
+            self.assertEqual(len(scopes), len(set(scopes)))
+            self.assertIn("people-operations-department", {item["name"] for item in result["inactive_departments"]})
 
     def test_acceptance_failure_is_not_done(self):
         with tempfile.TemporaryDirectory() as tmp:
