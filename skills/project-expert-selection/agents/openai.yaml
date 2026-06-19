@@ -1,0 +1,8 @@
+name: 专家选择
+description: 先复用已安装专家 Skill，缺失时生成 Nuwa 蒸馏授权请求。
+default_prompt: 使用 project-expert-selection 匹配领域专家，避免重复创建或下载。
+implicit_invocation:
+  when:
+    - 领域专家缺失、需要名人/组织方法、已有 Skill 不确定
+  avoid:
+    - 已有明确官方 Skill 可以直接覆盖

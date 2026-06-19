@@ -1,0 +1,8 @@
+name: 人事编制
+description: 动态决定部门和员工增减，控制并发、职责重叠和 token 成本。
+default_prompt: 使用 project-staffing 给出最小可行编制、并发上限、职责边界和减员条件。
+implicit_invocation:
+  when:
+    - 中大型项目、部门增减、任务重叠、并发上限、token 成本控制
+  avoid:
+    - 小型直接任务

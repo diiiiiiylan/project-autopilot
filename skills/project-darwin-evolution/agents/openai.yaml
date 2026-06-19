@@ -1,0 +1,8 @@
+name: 达尔文进化
+description: 经授权后对 Skill 做实验、评分、迭代和回滚治理。
+default_prompt: 使用 project-darwin-evolution 准备 Darwin 授权请求、评分标准和回滚边界。
+implicit_invocation:
+  when:
+    - Skill 优化、进化、评分、迭代实验、用户要求达尔文
+  avoid:
+    - 未授权下载运行或缺少可验证基线

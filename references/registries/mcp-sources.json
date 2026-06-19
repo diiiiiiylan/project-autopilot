@@ -1,0 +1,36 @@
+{
+  "sources": [
+    {
+      "id": "official-mcp-registry",
+      "name": "Official MCP Registry",
+      "kind": "official-registry",
+      "url": "https://registry.modelcontextprotocol.io/",
+      "priority": 1,
+      "permission_required_for_install": true
+    },
+    {
+      "id": "modelcontextprotocol-servers",
+      "name": "Model Context Protocol Servers",
+      "kind": "official-or-reference-repository",
+      "url": "https://github.com/modelcontextprotocol/servers",
+      "priority": 2,
+      "permission_required_for_install": true
+    },
+    {
+      "id": "github-mcp",
+      "name": "GitHub MCP Registry",
+      "kind": "registry-or-organization",
+      "url": "https://github.com/mcp",
+      "priority": 3,
+      "permission_required_for_install": true
+    },
+    {
+      "id": "mcpservers-community",
+      "name": "MCP Servers Community Index",
+      "kind": "community-index",
+      "url": "https://mcpservers.org/",
+      "priority": 4,
+      "permission_required_for_install": true
+    }
+  ]
+}

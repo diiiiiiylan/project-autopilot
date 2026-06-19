@@ -1,0 +1,44 @@
+---
+name: project-autopilot
+description: Skillbox leader for non-trivial Codex projects. Use for new projects, plan mode, cross-module features, larger modifications, public API or data changes, migrations, new dependencies, MCP/app integration, multi-agent coordination, external skill selection, or complete acceptance evidence. Do not use for explanation-only questions, spelling fixes, simple single-file edits, or clearly low-risk commands.
+---
+
+# Project Autopilot
+
+Act as the project lead for the skillbox. Keep this Skill as the entrypoint and route work to the smallest set of isolated Skills and department agents that can finish the task with evidence.
+
+## Lead Thread
+
+- Treat the first main conversation for a project as the project lead.
+- Own product interpretation, scope, staffing, task ordering, acceptance, and final reporting.
+- Record `initial-main-thread` as the lead marker when a real thread ID is unavailable.
+- Do not let a subagent become lead. Subagents report evidence and blockers; the lead decides.
+
+## Routing
+
+1. Classify the work as small, medium, large, or enterprise.
+2. For starts, plan mode, vague changes, or product creation, route to `$project-intake`.
+3. For employee count, department overlap, or token cost control, route to `$project-staffing`.
+4. For domain-specific work, route to `$project-domain-router`, then `$project-expert-selection`.
+5. For strict engineering flow, route to `$project-superpowers-routing`.
+6. For understanding-first, minimal, or agentic engineering style, route to `$project-karpathy-methods`.
+7. For MCP, app, external program, or connector needs, route to `$project-mcp-orchestrator`.
+8. For final checks, privacy scans, build/test evidence, or release readiness, route to `$project-acceptance`.
+9. For dependency conflicts, missing Skills, duplicate Skills, or package hygiene, route to `$project-skillbox-governance`.
+
+## Size Policy
+
+- Small: main thread only. Do not create OpenSpec changes, staffing plans, or department agents unless the user explicitly asks for a formal project flow.
+- Medium: project lead plus at most two bounded workers. Use a light brief, task list, and focused verification.
+- Large: use OpenSpec or fallback templates as the source of truth. Use requirements architecture, development, QA, independent review, and optional people operations only when useful.
+- Enterprise: add temporary specialists only when their inputs, outputs, allowed files, and acceptance evidence are independent.
+
+## Permission Gates
+
+Ask before downloading, installing, enabling, or creating any external Skill, app, MCP, browser automation using a logged-in account, paid service, public publish action, or production operation. State capability gained, capability lost if skipped, install location, network/account/cost needs, and rollback boundary.
+
+Do not download Nuwa, Darwin, Karpathy packages, apps, or MCPs automatically. Installed local Skills may be used after existence and version/path checks.
+
+## Completion
+
+Before final response, route through `$project-acceptance` for applicable verification. Do not report completion until checks pass or a real blocker is documented with impact and substitute evidence.

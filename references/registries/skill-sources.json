@@ -1,0 +1,73 @@
+{
+  "sources": [
+    {
+      "id": "superpowers",
+      "name": "Superpowers",
+      "kind": "methodology-skill-pack",
+      "license": "MIT",
+      "status": "optional-installed-or-plugin",
+      "capability": "Strict engineering workflows: brainstorming, TDD, debugging, planning, code review, and verification.",
+      "permission_required_for_download": true,
+      "notes": "Use installed plugin skills when available. Keep LICENSE/NOTICE if vendored in the future."
+    },
+    {
+      "id": "karpathy-local-skills",
+      "name": "Karpathy Skills",
+      "kind": "local-method-skills",
+      "status": "optional-installed-local",
+      "capability": "Understanding-first, minimalism, agentic engineering, supply-chain hygiene, and prototype-to-engineering methods.",
+      "permission_required_for_download": true,
+      "notes": "Prefer locally installed Karpathy skills when present. Do not download external copies without approval."
+    },
+    {
+      "id": "nuwa-skill",
+      "name": "Nuwa Skill",
+      "kind": "external-skill-source",
+      "url": "https://github.com/alchaincyf/nuwa-skill",
+      "status": "tracked-only",
+      "capability": "Distill expert, celebrity, or organization methods into candidate Skills.",
+      "permission_required_for_download": true
+    },
+    {
+      "id": "darwin-skill",
+      "name": "Darwin Skill",
+      "kind": "external-skill-source",
+      "url": "https://github.com/alchaincyf/darwin-skill",
+      "status": "tracked-only",
+      "capability": "Iterate and optimize Skills through experiments, scoring, and validation.",
+      "permission_required_for_download": true
+    },
+    {
+      "id": "voltagent-awesome-agent-skills",
+      "name": "VoltAgent Awesome Agent Skills",
+      "kind": "external-index",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "status": "tracked-only",
+      "permission_required_for_download": true
+    },
+    {
+      "id": "addyosmani-agent-skills",
+      "name": "Addy Osmani Agent Skills",
+      "kind": "external-index",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "status": "tracked-only",
+      "permission_required_for_download": true
+    },
+    {
+      "id": "nvidia-skills",
+      "name": "NVIDIA Skills",
+      "kind": "external-index",
+      "url": "https://github.com/nvidia/skills",
+      "status": "tracked-only",
+      "permission_required_for_download": true
+    },
+    {
+      "id": "orchestra-research-ai-skills",
+      "name": "Orchestra Research AI Research Skills",
+      "kind": "external-index",
+      "url": "https://github.com/Orchestra-Research/AI-Research-SKILLs",
+      "status": "tracked-only",
+      "permission_required_for_download": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+name: 项目总控
+description: 项目组长入口，负责识别任务体量、路由技能宝箱、协调部门 Agent，并控制验收。
+default_prompt: 使用 project-autopilot 作为技能宝箱组长，先判断任务体量，再按需调用 intake、staffing、domain、method、MCP、acceptance 和 governance Skill。
+implicit_invocation:
+  when:
+    - 新项目、计划模式、跨模块修改、迁移、新依赖、MCP/应用连接、多 Agent 协作、完整验收
+  avoid:
+    - 解释问题、拼写修正、简单命令、明确低风险单文件小改

@@ -1,0 +1,8 @@
+name: MCP 连接
+description: 识别应用和 MCP 需求，查找官方/社区来源，并生成授权请求或自建方案。
+default_prompt: 使用 project-mcp-orchestrator 只读发现 MCP 候选，未经授权不安装不创建。
+implicit_invocation:
+  when:
+    - MCP、外部程序、应用连接、下载应用、创建 connector、网页 GPT
+  avoid:
+    - 不需要外部程序连接的本地代码任务

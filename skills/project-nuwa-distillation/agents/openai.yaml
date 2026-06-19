@@ -1,0 +1,8 @@
+name: 女娲蒸馏
+description: 经授权后把专家或名人方法蒸馏为候选 Skill；未授权只生成方案。
+default_prompt: 使用 project-nuwa-distillation 准备 Nuwa 授权请求和蒸馏验收标准，不擅自下载。
+implicit_invocation:
+  when:
+    - 缺少专家 Skill、需要专家/名人方法蒸馏、用户要求女娲
+  avoid:
+    - 已有合适专家 Skill 或用户未授权下载调用

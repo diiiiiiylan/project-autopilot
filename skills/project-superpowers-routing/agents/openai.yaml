@@ -1,0 +1,8 @@
+name: 方法流程
+description: 把项目阶段映射到 Superpowers 的计划、TDD、调试、审查和验收流程。
+default_prompt: 使用 project-superpowers-routing 选择合适的 Superpowers 工作流或本地 fallback。
+implicit_invocation:
+  when:
+    - 复杂实现、调试、TDD、计划执行、代码审查、完成前验证
+  avoid:
+    - 简单直接命令

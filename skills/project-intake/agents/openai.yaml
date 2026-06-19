@@ -1,0 +1,8 @@
+name: 项目问询
+description: 项目启动时按需补齐体量、边界、验收和禁止事项。
+default_prompt: 使用 project-intake 把用户口语化需求整理成项目 brief，只追问会改变方案的关键问题。
+implicit_invocation:
+  when:
+    - 计划模式、我要修改、开始做项目、新产品、需求不清但任务不小
+  avoid:
+    - 拼写、解释、简单单文件修复

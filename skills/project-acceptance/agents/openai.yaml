@@ -1,0 +1,8 @@
+name: 收尾验收
+description: 发现并执行真实检查，生成完成证据和剩余风险。
+default_prompt: 使用 project-acceptance 做构建、测试、隐私扫描和发布前证据检查。
+implicit_invocation:
+  when:
+    - 完成前、发布前、推送前、验收、测试失败修复、隐私扫描
+  avoid:
+    - 纯咨询不需要修改或交付

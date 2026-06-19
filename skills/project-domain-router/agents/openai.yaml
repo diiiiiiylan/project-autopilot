@@ -1,0 +1,8 @@
+name: 领域识别
+description: 判断项目领域并选择后续专家 Skill 路线。
+default_prompt: 使用 project-domain-router 识别项目领域、已有专家 Skill 和能力缺口。
+implicit_invocation:
+  when:
+    - 新项目、跨领域任务、需要专家 Skill、技术栈不明确
+  avoid:
+    - 领域明确且低风险的小改
