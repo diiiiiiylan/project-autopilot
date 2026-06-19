@@ -12,6 +12,7 @@ SKILLS = {
     "staffing": "project-staffing",
     "domain": "project-domain-router",
     "expert": "project-expert-selection",
+    "gpt": "project-gpt-consultation",
     "nuwa": "project-nuwa-distillation",
     "darwin": "project-darwin-evolution",
     "superpowers": "project-superpowers-routing",
@@ -111,6 +112,11 @@ def route_prompt(prompt: str) -> RouteResult:
     if complexity != "small" or any(marker in text for marker in ("计划模式", "start", "开始", "project", "项目", "saas")):
         skills.extend([SKILLS["intake"], SKILLS["staffing"], SKILLS["domain"]])
 
+    if complexity in {"medium", "large", "enterprise"} or any(
+        marker in text for marker in ("plan", "proposal", "architecture", "方案", "聊透", "gpt", "chatgpt")
+    ):
+        skills.append(SKILLS["gpt"])
+
     if complexity in {"medium", "large", "enterprise"}:
         skills.append(SKILLS["superpowers"])
 
@@ -136,6 +142,9 @@ def route_prompt(prompt: str) -> RouteResult:
         for action in ("install_mcp", "install_app", "create_mcp", "web_gpt"):
             if permission_required(action):
                 requires_permission.append(action)
+
+    if any(marker in text for marker in ("gpt", "web gpt", "chatgpt", "网页 gpt")):
+        requires_permission.append("call_external_gpt")
 
     if complexity != "small" or any(marker in text for marker in ("finish", "acceptance", "验收", "发布", "push")):
         skills.append(SKILLS["acceptance"])

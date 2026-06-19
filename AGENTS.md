@@ -14,6 +14,7 @@ Maintain a publishable Codex skillbox package that provides low-interaction proj
 - People operations department: recommends staffing changes, concurrency limits, ownership, and conflict fixes. No code edits.
 - Methodology coordination department: routes stages to Superpowers, Karpathy, Nuwa, Darwin, or local fallback. No code edits.
 - Domain expert department: identifies project domains and expert Skill gaps. File edits only when explicitly assigned a bounded implementation task.
+- GPT consultation department: prepares and records GPT consultation before方案 finalization. It must pause if no callable GPT/web tool is authorized.
 - MCP connection department: discovers application/MCP candidates and prepares permission requests. No install/create actions without approval.
 - Security supply chain department: checks external Skill, MCP, app, dependency, privacy, and publishing risk. Read-only by default.
 

@@ -24,18 +24,22 @@
       "name": "Nuwa Skill",
       "kind": "external-skill-source",
       "url": "https://github.com/alchaincyf/nuwa-skill",
-      "status": "tracked-only",
+      "status": "vendored-source-snapshot",
       "capability": "Distill expert, celebrity, or organization methods into candidate Skills.",
-      "permission_required_for_download": true
+      "permission_required_for_download": true,
+      "local_path": "external/skills/nuwa-skill",
+      "downloaded_commit": "f4c9bc3f8df2cc036f9bed47ac2fecf56c366555"
     },
     {
       "id": "darwin-skill",
       "name": "Darwin Skill",
       "kind": "external-skill-source",
       "url": "https://github.com/alchaincyf/darwin-skill",
-      "status": "tracked-only",
+      "status": "vendored-source-snapshot",
       "capability": "Iterate and optimize Skills through experiments, scoring, and validation.",
-      "permission_required_for_download": true
+      "permission_required_for_download": true,
+      "local_path": "external/skills/darwin-skill",
+      "downloaded_commit": "7c7b7909b630dc3b5cbb91bd4bcb1b10bfb1f894"
     },
     {
       "id": "voltagent-awesome-agent-skills",

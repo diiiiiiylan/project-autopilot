@@ -14,6 +14,7 @@ DEPENDENCIES = [
     {"id": "project-intake", "type": "skill", "required": True},
     {"id": "project-staffing", "type": "skill", "required": True},
     {"id": "project-domain-router", "type": "skill", "required": True},
+    {"id": "project-gpt-consultation", "type": "skill", "required": True},
     {"id": "project-acceptance", "type": "skill", "required": True},
     {"id": "superpowers:verification-before-completion", "type": "plugin-skill", "required": False},
     {"id": "karpathy-understanding-first", "type": "skill", "required": False},
@@ -21,9 +22,14 @@ DEPENDENCIES = [
     {"id": "karpathy-agentic-engineering", "type": "skill", "required": False},
     {"id": "karpathy-supply-chain-hygiene", "type": "skill", "required": False},
     {"id": "karpathy-vibe-to-agentic", "type": "skill", "required": False},
-    {"id": "nuwa-skill", "type": "external-skill", "required": False, "permission_required": True},
-    {"id": "darwin-skill", "type": "external-skill", "required": False, "permission_required": True},
+    {"id": "nuwa-skill", "type": "external-skill", "skill_name": "huashu-nuwa", "required": False, "permission_required": True},
+    {"id": "darwin-skill", "type": "external-skill", "skill_name": "darwin-skill", "required": False, "permission_required": True},
 ]
+
+VENDORED_EXTERNAL = {
+    "nuwa-skill": Path(__file__).resolve().parents[1] / "external" / "skills" / "nuwa-skill" / "SKILL.md",
+    "darwin-skill": Path(__file__).resolve().parents[1] / "external" / "skills" / "darwin-skill" / "SKILL.md",
+}
 
 
 def skill_roots() -> list[Path]:
@@ -54,7 +60,12 @@ def audit() -> dict[str, object]:
     roots = skill_roots()
     results = []
     for dep in DEPENDENCIES:
-        matches = find_skill(dep["id"], roots) if dep["type"] in {"skill", "plugin-skill"} else []
+        if dep["type"] == "external-skill":
+            matches = find_skill(str(dep.get("skill_name", dep["id"])), roots)
+            if dep["id"] in VENDORED_EXTERNAL and VENDORED_EXTERNAL[dep["id"]].exists():
+                matches.append(str(VENDORED_EXTERNAL[dep["id"]]))
+        else:
+            matches = find_skill(dep["id"], roots) if dep["type"] in {"skill", "plugin-skill"} else []
         installed = bool(matches)
         results.append(
             {

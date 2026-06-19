@@ -4,7 +4,7 @@
 
 It helps Codex handle non-trivial project work by choosing the right execution mode, coordinating isolated Skills, using OpenSpec or fallback templates as the source of truth, coordinating bounded department agents, preventing duplicate task execution, running verification gates, repairing failures, and producing acceptance evidence.
 
-The package now uses a skillbox model: `project-autopilot` is the project lead entrypoint, while intake, staffing, domain routing, expert selection, Superpowers routing, Karpathy methods, Nuwa/Darwin adapters, MCP orchestration, acceptance, and governance each live in their own Skill.
+The package now uses a skillbox model: `project-autopilot` is the project lead entrypoint, while intake, staffing, domain routing, expert selection, GPT consultation, Superpowers routing, Karpathy methods, Nuwa/Darwin adapters, MCP orchestration, acceptance, and governance each live in their own Skill.
 
 ## What It Includes
 
@@ -12,6 +12,7 @@ The package now uses a skillbox model: `project-autopilot` is the project lead e
 - `skill/`: legacy compatibility Skill folder and validation scripts.
 - `custom-agents/`: bounded department agent configs.
 - `references/registries/`: tracked open-source Skill and MCP sources.
+- `external/skills/`: approved vendored source snapshots for Nuwa and Darwin.
 - `tools/validate_package.py`: package-level validation.
 - `tools/dependency_audit.py`: read-only installed dependency audit.
 - `tools/mcp_discovery.py`: read-only MCP source discovery.
@@ -28,10 +29,11 @@ python tools/install.py
 This copies:
 
 - `skills/*` to `$HOME/.agents/skills/<skill-name>/`
+- approved external Skill snapshots from `external/skills/*` to `$HOME/.agents/skills/<external-skill-name>/`
 - `custom-agents/*.toml` to `${CODEX_HOME:-$HOME/.codex}/agents/`
 - a managed project-autopilot block into `${CODEX_HOME:-$HOME/.codex}/AGENTS.md`
 
-Install does not download Nuwa, Darwin, Karpathy packages, apps, or MCPs. When a missing external dependency is needed or materially improves the main path, the Skill must pause immediately and request explicit user permission before that branch continues.
+Nuwa and Darwin source snapshots are included under `external/skills/` after explicit user approval. Future downloads, app installs, MCP enablement, custom MCP creation, or account-backed GPT/web calls must pause immediately and request explicit user permission before that branch continues.
 
 ## Validate
 

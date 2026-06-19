@@ -61,6 +61,13 @@ class SkillboxPackageTests(unittest.TestCase):
         self.assertIn("project-intake", route.skills)
         self.assertIn("project-staffing", route.skills)
         self.assertIn("project-domain-router", route.skills)
+        self.assertIn("project-gpt-consultation", route.skills)
+
+    def test_plan_finalization_triggers_gpt_consultation(self):
+        route = skillbox_router.route_prompt("before final proposal, use GPT consultation to discuss the plan thoroughly")
+        self.assertIn("project-gpt-consultation", route.skills)
+        self.assertIn("call_external_gpt", route.requires_permission)
+        self.assertTrue(route.pause_for_permission)
 
     def test_bugfix_triggers_superpowers_debugging_route(self):
         route = skillbox_router.route_prompt("Fix a cross-module bug with failing tests")
@@ -120,6 +127,11 @@ class SkillboxPackageTests(unittest.TestCase):
         for rel in validate_package.REGISTRY_FILES:
             payload = json.loads((ROOT / rel).read_text(encoding="utf-8"))
             self.assertTrue(payload["sources"])
+
+    def test_external_nuwa_and_darwin_sources_are_present(self):
+        self.assertTrue((ROOT / "external" / "skills" / "nuwa-skill" / "SKILL.md").exists())
+        self.assertTrue((ROOT / "external" / "skills" / "darwin-skill" / "SKILL.md").exists())
+        self.assertTrue((ROOT / "external" / "skills" / "SOURCES.md").exists())
 
 
 if __name__ == "__main__":

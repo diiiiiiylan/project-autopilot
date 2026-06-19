@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS_SRC = ROOT / "skills"
 AGENTS_SRC = ROOT / "custom-agents"
+EXTERNAL_SKILLS_SRC = ROOT / "external" / "skills"
 GLOBAL_BLOCK_START = "<!-- BEGIN PROJECT-AUTOPILOT MANAGED BLOCK -->"
 GLOBAL_BLOCK_END = "<!-- END PROJECT-AUTOPILOT MANAGED BLOCK -->"
 
@@ -44,6 +45,17 @@ def copy_file_with_backup(src: Path, dst: Path, backup_root: Path) -> None:
         backup_file(dst, backup_root)
     dst.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(src, dst)
+
+
+def skill_name(skill_dir: Path) -> str:
+    text = (skill_dir / "SKILL.md").read_text(encoding="utf-8", errors="ignore")
+    if text.startswith("---"):
+        end = text.find("\n---", 3)
+        if end != -1:
+            for line in text[3:end].splitlines():
+                if line.startswith("name:"):
+                    return line.split(":", 1)[1].strip().strip('"')
+    return skill_dir.name
 
 
 def copy_tree(src: Path, dst: Path, backup_root: Path) -> None:
@@ -79,6 +91,10 @@ def main() -> int:
     for skill_dir in sorted(SKILLS_SRC.iterdir()):
         if skill_dir.is_dir() and (skill_dir / "SKILL.md").exists():
             copy_tree(skill_dir, skills_dst / skill_dir.name, backup_root)
+    if EXTERNAL_SKILLS_SRC.exists():
+        for skill_dir in sorted(EXTERNAL_SKILLS_SRC.iterdir()):
+            if skill_dir.is_dir() and (skill_dir / "SKILL.md").exists():
+                copy_tree(skill_dir, skills_dst / skill_name(skill_dir), backup_root)
     agents_dst.mkdir(parents=True, exist_ok=True)
     for agent in AGENTS_SRC.glob("*.toml"):
         copy_file_with_backup(agent, agents_dst / agent.name, backup_root)

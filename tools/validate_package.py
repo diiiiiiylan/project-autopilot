@@ -23,6 +23,7 @@ REQUIRED_SKILLS = [
     "project-staffing",
     "project-domain-router",
     "project-expert-selection",
+    "project-gpt-consultation",
     "project-nuwa-distillation",
     "project-darwin-evolution",
     "project-superpowers-routing",
@@ -42,6 +43,7 @@ REQUIRED_AGENTS = [
     "domain-expert-department.toml",
     "mcp-connection-department.toml",
     "security-supply-chain-department.toml",
+    "gpt-consultation-department.toml",
 ]
 
 REGISTRY_FILES = [

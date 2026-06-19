@@ -1,0 +1,8 @@
+name: GPT 咨询
+description: 项目方案定稿前的 GPT 咨询门，负责聊透目标、风险、依赖和验收缺口。
+default_prompt: 使用 project-gpt-consultation 在方案定稿前进行 GPT 咨询；没有可调用工具时立即请求授权或 fallback。
+implicit_invocation:
+  when:
+    - 方案定稿、架构方案、技能包融合、专家蒸馏、MCP/应用策略、用户要求先和 GPT 聊透
+  avoid:
+    - 简单小改、纯解释、已经有明确用户批准跳过咨询

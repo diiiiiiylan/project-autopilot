@@ -20,11 +20,12 @@ Act as the project lead for the skillbox. Keep this Skill as the entrypoint and 
 2. For starts, plan mode, vague changes, or product creation, route to `$project-intake`.
 3. For employee count, department overlap, or token cost control, route to `$project-staffing`.
 4. For domain-specific work, route to `$project-domain-router`, then `$project-expert-selection`.
-5. For strict engineering flow, route to `$project-superpowers-routing`.
-6. For understanding-first, minimal, or agentic engineering style, route to `$project-karpathy-methods`.
-7. For MCP, app, external program, or connector needs, route to `$project-mcp-orchestrator`.
-8. For final checks, privacy scans, build/test evidence, or release readiness, route to `$project-acceptance`.
-9. For dependency conflicts, missing Skills, duplicate Skills, or package hygiene, route to `$project-skillbox-governance`.
+5. Before finalizing a non-trivial方案, architecture proposal, external Skill integration, or MCP/app strategy, route to `$project-gpt-consultation`.
+6. For strict engineering flow, route to `$project-superpowers-routing`.
+7. For understanding-first, minimal, or agentic engineering style, route to `$project-karpathy-methods`.
+8. For MCP, app, external program, or connector needs, route to `$project-mcp-orchestrator`.
+9. For final checks, privacy scans, build/test evidence, or release readiness, route to `$project-acceptance`.
+10. For dependency conflicts, missing Skills, duplicate Skills, or package hygiene, route to `$project-skillbox-governance`.
 
 ## Size Policy
 
