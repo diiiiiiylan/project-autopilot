@@ -40,4 +40,4 @@ npm run render
 
 Do not commit `node_modules`, Python caches, local environment files, secrets, user-home paths, logs, or generated dependency caches. Run `tools/privacy_scan.py` before any GitHub push.
 
-Do not download, install, enable, create, or call external Skills, applications, MCPs, or logged-in account tools without explicit user permission. The repository may track sources and prepare permission requests, but install actions must remain separate and auditable.
+Do not download, install, enable, create, or call external Skills, applications, MCPs, or logged-in account tools without explicit user permission. When such a dependency is needed or materially improves the main path, pause immediately and ask before continuing into that branch; do not defer it to final reporting. The repository may track sources and prepare permission requests, but install actions must remain separate and auditable.

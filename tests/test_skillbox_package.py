@@ -57,7 +57,7 @@ class SkillboxPackageTests(unittest.TestCase):
             self.assertTrue(data["developer_instructions"])
 
     def test_new_project_triggers_intake_staffing_and_domain_router(self):
-        route = skillbox_router.route_prompt("我要开始做一个 SaaS 项目")
+        route = skillbox_router.route_prompt("start a SaaS project")
         self.assertIn("project-intake", route.skills)
         self.assertIn("project-staffing", route.skills)
         self.assertIn("project-domain-router", route.skills)
@@ -71,32 +71,50 @@ class SkillboxPackageTests(unittest.TestCase):
         route = skillbox_router.route_prompt("prototype polish this vibe into an agentic implementation")
         self.assertIn("project-karpathy-methods", route.skills)
 
-    def test_expert_missing_triggers_nuwa_permission_not_download(self):
-        route = skillbox_router.route_prompt("缺少这个领域专家，用 Nuwa 女娲蒸馏一个专家 Skill")
+    def test_expert_missing_triggers_immediate_nuwa_permission_not_download(self):
+        route = skillbox_router.route_prompt("missing domain expert, use Nuwa to distill an expert Skill")
         self.assertIn("project-expert-selection", route.skills)
         self.assertIn("project-nuwa-distillation", route.skills)
         self.assertIn("download_or_run_nuwa", route.requires_permission)
+        self.assertTrue(route.pause_for_permission)
+        self.assertEqual(route.permission_timing, "immediately_when_dependency_gap_is_found")
 
-    def test_skill_evolution_triggers_darwin_permission_not_run(self):
-        route = skillbox_router.route_prompt("优化 Skill，让 Darwin 达尔文进化它")
+    def test_skill_evolution_triggers_immediate_darwin_permission_not_run(self):
+        route = skillbox_router.route_prompt("optimize Skill and let Darwin evolve it")
         self.assertIn("project-darwin-evolution", route.skills)
         self.assertIn("download_or_run_darwin", route.requires_permission)
+        self.assertTrue(route.pause_for_permission)
+        self.assertEqual(route.permission_timing, "immediately_when_dependency_gap_is_found")
 
     def test_mcp_discovery_is_read_only_and_prioritizes_official_sources(self):
         result = mcp_discovery.discover("github mcp")
         self.assertFalse(result["install_permitted"])
         self.assertFalse(result["create_permitted"])
         self.assertTrue(result["permission_required_before_install_or_create"])
+        self.assertTrue(result["must_pause_before_install_or_create"])
+        self.assertEqual(result["ask_timing"], "immediately_when_mcp_or_app_gap_is_found")
         self.assertEqual(result["candidates"][0]["id"], "official-mcp-registry")
 
     def test_missing_mcp_generates_custom_plan_but_does_not_create(self):
-        result = mcp_discovery.discover("找不到 unknown tool 的 MCP")
+        result = mcp_discovery.discover("no mcp for unknown tool")
         self.assertTrue(result["custom_mcp_plan_required"])
         self.assertFalse(result["create_permitted"])
 
     def test_permission_required_for_external_actions(self):
         for action in ("download_nuwa", "download_darwin", "install_app", "install_mcp", "create_mcp", "web_gpt"):
             self.assertTrue(skillbox_router.permission_required(action))
+
+    def test_permission_request_is_immediate_and_not_completion_report(self):
+        request = skillbox_router.build_permission_request(
+            action="download",
+            target="nuwa-skill",
+            capability="distill a missing expert method into a candidate Skill",
+            skipped_consequence="use a weaker local fallback without expert distillation",
+        )
+        self.assertEqual(request["ask_timing"], "immediately_when_dependency_gap_is_found")
+        self.assertTrue(request["must_pause_before_action"])
+        self.assertTrue(request["requires_explicit_user_approval"])
+        self.assertTrue(request["must_not_report_as_completed_if_skipped"])
 
     def test_registries_are_parseable(self):
         for rel in validate_package.REGISTRY_FILES:

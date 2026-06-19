@@ -9,7 +9,7 @@ Use Darwin only as an approved external dependency for Skill evolution.
 
 ## Rules
 
-- Ask before download, install, or invocation.
+- As soon as Darwin becomes necessary or materially beneficial, pause and ask before download, install, or invocation. Do not wait until final reporting.
 - Define baseline behavior, candidate changes, scoring metrics, regression tests, and rollback before any evolution run.
 - Keep experiments isolated from production Skills until validation passes.
 - Do not evolve failed, one-off, sensitive, or poorly evidenced workflows.

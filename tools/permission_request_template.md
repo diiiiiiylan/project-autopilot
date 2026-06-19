@@ -1,6 +1,8 @@
 # Permission Request Template
 
-Use this template before downloading, installing, enabling, creating, or invoking external Skills, applications, MCPs, or account-backed tools.
+Use this template immediately when a required external Skill, application, MCP, or account-backed tool is missing or would materially improve the main path.
+
+Do not wait until the final report. Pause before download, install, enablement, creation, or invocation.
 
 ## Request
 

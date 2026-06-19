@@ -48,6 +48,8 @@ def discover(query: str) -> dict[str, object]:
         "create_permitted": False,
         "custom_mcp_plan_required": "unknown tool" in text or "no mcp" in text or "找不到" in text,
         "permission_required_before_install_or_create": True,
+        "ask_timing": "immediately_when_mcp_or_app_gap_is_found",
+        "must_pause_before_install_or_create": True,
     }
 
 

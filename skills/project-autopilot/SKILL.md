@@ -35,7 +35,9 @@ Act as the project lead for the skillbox. Keep this Skill as the entrypoint and 
 
 ## Permission Gates
 
-Ask before downloading, installing, enabling, or creating any external Skill, app, MCP, browser automation using a logged-in account, paid service, public publish action, or production operation. State capability gained, capability lost if skipped, install location, network/account/cost needs, and rollback boundary.
+When routing discovers that an external Skill, app, MCP, browser automation using a logged-in account, paid service, public publish action, or production operation is needed or would materially improve the main path, stop immediately and ask before continuing into that branch. Do not defer this to the final report.
+
+State capability gained, capability lost if skipped, install location, network/account/cost needs, and rollback boundary. Continue only after explicit user approval.
 
 Do not download Nuwa, Darwin, Karpathy packages, apps, or MCPs automatically. Installed local Skills may be used after existence and version/path checks.
 

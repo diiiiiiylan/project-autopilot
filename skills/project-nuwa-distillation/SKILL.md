@@ -9,7 +9,7 @@ Use Nuwa only as an approved external dependency for expert method distillation.
 
 ## Permission First
 
-Before download, install, or invocation, ask for approval and state capability gained, fallback if skipped, source URL, install path, network/account/cost needs, and rollback.
+As soon as Nuwa becomes necessary or materially beneficial, pause and ask for approval before continuing into the Nuwa branch. State capability gained, fallback if skipped, source URL, install path, network/account/cost needs, and rollback. Do not wait until final reporting.
 
 ## Distillation Criteria
 

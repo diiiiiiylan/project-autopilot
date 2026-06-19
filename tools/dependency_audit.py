@@ -64,6 +64,7 @@ def audit() -> dict[str, object]:
                 "installed": installed,
                 "locations": matches,
                 "permission_required": dep.get("permission_required", False) or (not installed and dep["type"].startswith("external")),
+                "ask_immediately_when_needed": bool(dep.get("permission_required", False) or (not installed and dep["type"].startswith("external"))),
             }
         )
     return {"skill_roots_checked": [str(root) for root in roots], "dependencies": results}

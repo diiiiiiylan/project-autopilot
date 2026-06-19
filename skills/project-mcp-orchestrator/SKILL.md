@@ -18,6 +18,6 @@ Govern application and MCP connections.
 
 ## Permission Gate
 
-Ask before downloading applications, installing MCPs, enabling MCP servers, creating custom MCPs, or calling tools that require a logged-in external account. Explain capability, lost capability if skipped, install path, network/account/cost needs, security boundary, verification command, and rollback.
+When an app or MCP gap is found and that connection is needed or materially improves the main path, pause immediately and ask before downloading applications, installing MCPs, enabling MCP servers, creating custom MCPs, or calling tools that require a logged-in external account. Explain capability, lost capability if skipped, install path, network/account/cost needs, security boundary, verification command, and rollback. Do not wait until final reporting.
 
 Custom MCPs require stable repeated need, safe command boundary, non-secret env names, port policy, validation command, and rollback path.

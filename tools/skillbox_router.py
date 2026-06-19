@@ -28,6 +28,8 @@ class RouteResult:
     complexity: str
     skills: list[str]
     requires_permission: list[str]
+    permission_timing: str
+    pause_for_permission: bool
 
 
 def classify_complexity(prompt: str) -> str:
@@ -86,6 +88,20 @@ def permission_required(action: str) -> bool:
     return any(marker in text for marker in markers)
 
 
+def build_permission_request(action: str, target: str, capability: str, skipped_consequence: str) -> dict[str, object]:
+    """Build the request that must be shown before an external action starts."""
+    return {
+        "action": action,
+        "target": target,
+        "capability_gained": capability,
+        "capability_lost_if_skipped": skipped_consequence,
+        "ask_timing": "immediately_when_dependency_gap_is_found",
+        "must_pause_before_action": True,
+        "requires_explicit_user_approval": True,
+        "must_not_report_as_completed_if_skipped": True,
+    }
+
+
 def route_prompt(prompt: str) -> RouteResult:
     text = prompt.lower()
     complexity = classify_complexity(prompt)
@@ -128,7 +144,15 @@ def route_prompt(prompt: str) -> RouteResult:
         skills.append(SKILLS["governance"])
 
     deduped = list(dict.fromkeys(skills))
-    return RouteResult(prompt=prompt, complexity=complexity, skills=deduped, requires_permission=list(dict.fromkeys(requires_permission)))
+    deduped_permissions = list(dict.fromkeys(requires_permission))
+    return RouteResult(
+        prompt=prompt,
+        complexity=complexity,
+        skills=deduped,
+        requires_permission=deduped_permissions,
+        permission_timing="immediately_when_dependency_gap_is_found" if deduped_permissions else "not_required",
+        pause_for_permission=bool(deduped_permissions),
+    )
 
 
 def main() -> int:

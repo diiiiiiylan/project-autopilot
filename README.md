@@ -31,7 +31,7 @@ This copies:
 - `custom-agents/*.toml` to `${CODEX_HOME:-$HOME/.codex}/agents/`
 - a managed project-autopilot block into `${CODEX_HOME:-$HOME/.codex}/AGENTS.md`
 
-Install does not download Nuwa, Darwin, Karpathy packages, apps, or MCPs. Those actions require explicit user permission.
+Install does not download Nuwa, Darwin, Karpathy packages, apps, or MCPs. When a missing external dependency is needed or materially improves the main path, the Skill must pause immediately and request explicit user permission before that branch continues.
 
 ## Validate
 
@@ -56,3 +56,5 @@ Rendered output is written to `media/project-autopilot-intro.mp4` from the repos
 ## Safety Notes
 
 The repository is built from a sanitized release copy, not directly from a user home directory. Generated caches, local environment files, logs, and dependency folders are ignored.
+
+External downloads, installs, MCP enablement, custom MCP creation, and account-backed web/tool calls are not deferred to final reporting. They require an immediate permission request at discovery time.

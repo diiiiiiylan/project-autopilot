@@ -13,7 +13,7 @@ Keep the skillbox healthy.
 - Prefer installed official or project Skills before creating new ones.
 - Detect overlapping Skills and choose extension over duplication when coverage is adequate.
 - Track open-source sources, license notes, and whether code was vendored or only referenced.
-- Require permission before downloading, installing, enabling, or invoking external packages.
+- Require immediate permission requests when a missing external package, app, MCP, or account-backed tool is needed or materially beneficial. Do not defer the request until final reporting.
 - Create a candidate Skill only after repeated success with stable inputs, steps, outputs, and acceptance.
 
 Report missing dependencies with capability gained, consequence if skipped, location, account/network/cost needs, and risk.
