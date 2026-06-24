@@ -22,6 +22,7 @@ REQUIRED_SKILLS = [
     "project-intake",
     "project-staffing",
     "project-domain-router",
+    "project-context-continuity",
     "project-expert-selection",
     "project-gpt-consultation",
     "project-nuwa-distillation",
@@ -44,6 +45,7 @@ REQUIRED_AGENTS = [
     "mcp-connection-department.toml",
     "security-supply-chain-department.toml",
     "gpt-consultation-department.toml",
+    "context-continuity-department.toml",
 ]
 
 REGISTRY_FILES = [

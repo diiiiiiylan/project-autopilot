@@ -7,6 +7,8 @@ description: Dynamic staffing Skill for adding, removing, or simulating departme
 
 Choose the smallest team that preserves structure and independent verification.
 
+The user should not have to manually pick departments for normal project work. The project lead uses this Skill to auto-size the roster, explain only the chosen roster when useful, and adjust staffing as scope and remaining context change.
+
 ## Rules
 
 - Small: project lead only.
@@ -27,3 +29,10 @@ Choose the smallest team that preserves structure and independent verification.
 - Two workers would investigate or modify the same files, modules, or acceptance gate.
 
 Never exceed concurrency 4. Record role, input, output, allowed file access, and acceptance evidence for every active worker.
+
+## Context-Aware Staffing
+
+- Prefer fewer active workers when remaining context is low.
+- Add a worker only if its task can be specified from durable OpenSpec/fallback state without requiring hidden chat context.
+- Before compaction or resume, deactivate workers whose scope is done or unclear.
+- After resume, rebuild staffing from durable state instead of previous chat assumptions.

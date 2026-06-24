@@ -1,0 +1,8 @@
+name: 上下文连续性
+description: 负责 OpenSpec/状态续航、压缩前写入、恢复后读取和防幻觉继续。
+default_prompt: 使用 project-context-continuity 在长项目中维护 OpenSpec 或 fallback 状态，压缩/恢复前后都先同步事实来源。
+implicit_invocation:
+  when:
+    - 长线程、上下文不足、压缩、恢复、跨阶段项目、多 Agent 协作、OpenSpec 状态同步
+  avoid:
+    - 小型一次性任务

@@ -20,10 +20,13 @@ GLOBAL_BLOCK_END = "<!-- END PROJECT-AUTOPILOT MANAGED BLOCK -->"
 GLOBAL_BLOCK = f"""{GLOBAL_BLOCK_START}
 ## Project Autopilot Skillbox Global Rules
 
-- 非简单项目任务优先调用 `$project-autopilot` 技能宝箱入口。
-- 默认自主推进，减少不必要提问和重复复述。
+- 非简单项目任务自动调用 `$project-autopilot` 技能宝箱入口，由项目组长接管，不要求用户手动选择部门。
+- 项目组长必须自动判断任务体量、风险、剩余上下文和并行价值，再动态编制/裁撤部门。
+- OpenSpec 是非简单项目的需求、决策、任务和验收事实来源；没有 OpenSpec 时使用项目内 `.project-autopilot/changes/<change-id>/` fallback。
+- 长线程、上下文不足、压缩、恢复、跨阶段或多 Agent 协作前后，必须先同步并读取 durable state，避免凭压缩摘要幻想继续。
+- 默认自主推进，减少不必要提问和重复复述；只在凭据、付费、生产、不可逆、公开发布、重要删除或产品方向分歧时停下问。
 - 未通过验证不得宣布完成。
-- 子智能体只用于真正可并行且边界清晰的任务。
+- 子智能体只用于真正可并行且边界清晰的任务；最大深度 1，不能让用户手动当调度器。
 - 未经用户明确允许，不下载、安装、启用或创建外部 Skill、应用、MCP，也不调用需要登录态的外部账号工具。
 - 最终回复只报告完成结果、主要变更、验收证据和剩余风险。
 {GLOBAL_BLOCK_END}

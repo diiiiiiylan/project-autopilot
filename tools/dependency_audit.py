@@ -14,6 +14,7 @@ DEPENDENCIES = [
     {"id": "project-intake", "type": "skill", "required": True},
     {"id": "project-staffing", "type": "skill", "required": True},
     {"id": "project-domain-router", "type": "skill", "required": True},
+    {"id": "project-context-continuity", "type": "skill", "required": True},
     {"id": "project-gpt-consultation", "type": "skill", "required": True},
     {"id": "project-acceptance", "type": "skill", "required": True},
     {"id": "superpowers:verification-before-completion", "type": "plugin-skill", "required": False},

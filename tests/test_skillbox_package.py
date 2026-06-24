@@ -61,7 +61,13 @@ class SkillboxPackageTests(unittest.TestCase):
         self.assertIn("project-intake", route.skills)
         self.assertIn("project-staffing", route.skills)
         self.assertIn("project-domain-router", route.skills)
+        self.assertIn("project-context-continuity", route.skills)
         self.assertIn("project-gpt-consultation", route.skills)
+
+    def test_context_continuity_triggers_for_openspec_and_compaction(self):
+        route = skillbox_router.route_prompt("Use OpenSpec and protect context before compaction and resume")
+        self.assertIn("project-context-continuity", route.skills)
+        self.assertIn("project-autopilot", route.skills)
 
     def test_plan_finalization_triggers_gpt_consultation(self):
         route = skillbox_router.route_prompt("before final proposal, use GPT consultation to discuss the plan thoroughly")

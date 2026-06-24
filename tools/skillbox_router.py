@@ -12,6 +12,7 @@ SKILLS = {
     "staffing": "project-staffing",
     "domain": "project-domain-router",
     "expert": "project-expert-selection",
+    "context": "project-context-continuity",
     "gpt": "project-gpt-consultation",
     "nuwa": "project-nuwa-distillation",
     "darwin": "project-darwin-evolution",
@@ -111,6 +112,11 @@ def route_prompt(prompt: str) -> RouteResult:
 
     if complexity != "small" or any(marker in text for marker in ("计划模式", "start", "开始", "project", "项目", "saas")):
         skills.extend([SKILLS["intake"], SKILLS["staffing"], SKILLS["domain"]])
+
+    if complexity != "small" or any(
+        marker in text for marker in ("openspec", "context", "compact", "resume", "handoff", "上下文", "压缩", "恢复")
+    ):
+        skills.append(SKILLS["context"])
 
     if complexity in {"medium", "large", "enterprise"} or any(
         marker in text for marker in ("plan", "proposal", "architecture", "方案", "聊透", "gpt", "chatgpt")

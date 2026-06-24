@@ -12,6 +12,7 @@ Maintain a publishable Codex skillbox package that provides low-interaction proj
 - Quality assurance department: designs and runs validation, reproduces failures, and records evidence. Read-only unless adding focused tests.
 - Independent review department: checks correctness, safety, maintainability, missed requirements, and test gaps. Read-only by default.
 - People operations department: recommends staffing changes, concurrency limits, ownership, and conflict fixes. No code edits.
+- Context continuity department: maintains OpenSpec/fallback state, compression handoff, resume checks, and anti-hallucination continuity. Writes state files only unless assigned otherwise.
 - Methodology coordination department: routes stages to Superpowers, Karpathy, Nuwa, Darwin, or local fallback. No code edits.
 - Domain expert department: identifies project domains and expert Skill gaps. File edits only when explicitly assigned a bounded implementation task.
 - GPT consultation department: prepares and records GPT consultation before方案 finalization. It must pause if no callable GPT/web tool is authorized.
@@ -42,3 +43,5 @@ npm run render
 Do not commit `node_modules`, Python caches, local environment files, secrets, user-home paths, logs, or generated dependency caches. Run `tools/privacy_scan.py` before any GitHub push.
 
 Do not download, install, enable, create, or call external Skills, applications, MCPs, or logged-in account tools without explicit user permission. When such a dependency is needed or materially improves the main path, pause immediately and ask before continuing into that branch; do not defer it to final reporting. The repository may track sources and prepare permission requests, but install actions must remain separate and auditable.
+
+Non-simple project tasks must not require the user to manually choose departments. The skillbox should auto-detect project size, staffing, context budget, OpenSpec/fallback state needs, and verification gates.
